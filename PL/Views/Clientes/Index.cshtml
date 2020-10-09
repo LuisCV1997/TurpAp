@@ -1,0 +1,103 @@
+﻿@model ML.Result
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            <h2 class="text-center"><strong>Clientes</strong></h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm">
+
+        @using (Html.BeginForm("Carga", "Clientes", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken();
+        <div class="row" >
+            <div class="col-ms-6">
+                @Html.LabelFor(m => m.file)
+                @Html.TextBoxFor(m => m.file, new { type = "file", accept = ".txt" ,@class="form-control"})
+                @Html.ValidationMessageFor(m => m.file, "", new { @class = "text-danger" })
+               
+               
+            </div>
+            
+           
+        </div>
+        <div>
+            &nbsp;
+        </div>
+        <div class="row">
+            <button class="btn btn-success col-sm-3" value="Guardar">Guardar</button>
+        </div>
+
+            
+        }
+
+    </div>
+</div>
+&nbsp;
+<div class="container">
+    <div class="col-sm">
+        @Html.ActionLink("Agregar nuevo cliente", "Create", "Clientes", new { @class = "col-sm-3 col-sm-offset-9 btn btn-success" })
+        &nbsp;
+        <div class="row">
+            <table class="table table-responsive" id="tbl">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">RFC</th>
+                        <th class="text-center" scope="col">Nombre</th>
+                        <th class="text-center" scope="col">Fecha de Control</th>
+                        <th class="text-center" scope="col">Salario</th>
+                        <th class="text-center" scope="col">Numero de Cliente</th>
+                        <th class="text-center" scope="col">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Objects.Count > 0)
+                    {
+                        foreach (ML.Cliente cliente in Model.Objects)
+                        {
+                            <tr>
+                                <td class="text-center">@cliente.RFC</td>
+                                <td class="text-center">@cliente.Nombre</td>
+                                <td class="text-center">@cliente.Fecha_Control</td>
+                                <td class="text-center">@cliente.Salario</td>
+                                <td class="text-center">@cliente.Numero_Cliente</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Edit","Clientes", new { id = cliente.Id})" data-toggle="tooltip" data-placement="bottom" title="Actulizar"><i class="fas fa-edit"></i></a>
+                                    <a href="@Url.Action("Delete","Clientes", new { id = cliente.Id })" data-toggle="tooltip" data-placement="bottom" title="Borrar"><i class="fas fa-trash-alt"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+
+
+<script type="text/javascript" src=" https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src=" https://cdn.datatables.net/buttons/1.2.4/js/dataTables.buttons.min.js"></script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.24/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.4/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.4/css/buttons.dataTables.min.css">
+<script>
+    $('#tbl').DataTable({
+        "language": {
+            "emptyTable": "Sin registros"
+        }
+    });
+</script>

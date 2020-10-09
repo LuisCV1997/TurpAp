@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TurboPacModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RFC" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Fecha_Control" Type="datetime" Nullable="false" />
+          <Property Name="Salario" Type="money" Nullable="false" />
+          <Property Name="Numero_Cliente" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Function Name="Carga_add" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Add_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Salario" Type="money" Mode="In" />
+          <Parameter Name="NumeroC" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_Delete_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GetAll_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetById_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_Insert_Cliente_Carga" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Update_Cliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="RFC" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Fecha" Type="datetime" Mode="In" />
+          <Parameter Name="Salario" Type="money" Mode="In" />
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="NumeroC" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="TurboPacModelStoreContainer">
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TurboPacModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RFC" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Fecha_Control" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Salario" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Numero_Cliente" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="TurboPacEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <FunctionImport Name="SP_Add_Cliente" ReturnType="Collection(Decimal)">
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Salario" Mode="In" Type="Decimal" />
+            <Parameter Name="NumeroC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Delete_Cliente">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetAll_Cliente" ReturnType="Collection(TurboPacModel.SP_GetAll_Cliente_Result)" />
+          <FunctionImport Name="SP_GetById_Cliente" ReturnType="Collection(TurboPacModel.SP_GetById_Cliente_Result)">
+          <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Update_Cliente">
+            <Parameter Name="RFC" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="Salario" Mode="In" Type="Decimal" />
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="NumeroC" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Insert_Cliente_Carga" />
+          <FunctionImport Name="Carga_add" />
+        </EntityContainer>
+        <ComplexType Name="SP_GetAll_Cliente_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="Fecha_Control" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="Salario" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Numero_Cliente" Nullable="true" MaxLength="20" />
+        </ComplexType>
+        <ComplexType Name="SP_GetById_Cliente_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="RFC" Nullable="false" MaxLength="70" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="30" />
+          <Property Type="DateTime" Name="Fecha_Control" Nullable="false" Precision="23" />
+          <Property Type="Decimal" Name="Salario" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Numero_Cliente" Nullable="true" MaxLength="20" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TurboPacModelStoreContainer" CdmEntityContainer="TurboPacEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="TurboPacModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha_Control" ColumnName="Fecha_Control" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Numero_Cliente" ColumnName="Numero_Cliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Add_Cliente" FunctionName="TurboPacModel.Store.SP_Add_Cliente" />
+          <FunctionImportMapping FunctionImportName="SP_Delete_Cliente" FunctionName="TurboPacModel.Store.SP_Delete_Cliente" />
+          <FunctionImportMapping FunctionImportName="SP_GetAll_Cliente" FunctionName="TurboPacModel.Store.SP_GetAll_Cliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TurboPacModel.SP_GetAll_Cliente_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha_Control" ColumnName="Fecha_Control" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Numero_Cliente" ColumnName="Numero_Cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetById_Cliente" FunctionName="TurboPacModel.Store.SP_GetById_Cliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TurboPacModel.SP_GetById_Cliente_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RFC" ColumnName="RFC" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Fecha_Control" ColumnName="Fecha_Control" />
+                <ScalarProperty Name="Salario" ColumnName="Salario" />
+                <ScalarProperty Name="Numero_Cliente" ColumnName="Numero_Cliente" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Update_Cliente" FunctionName="TurboPacModel.Store.SP_Update_Cliente" />
+          <FunctionImportMapping FunctionImportName="SP_Insert_Cliente_Carga" FunctionName="TurboPacModel.Store.SP_Insert_Cliente_Carga" />
+          <FunctionImportMapping FunctionImportName="Carga_add" FunctionName="TurboPacModel.Store.Carga_add" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

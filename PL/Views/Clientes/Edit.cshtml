@@ -1,0 +1,73 @@
+﻿@model ML.Cliente
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="col-sm">
+        <div class="row">
+            <h2 class="text-center"><strong>Editar Cliente</strong></h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="col-sm">
+        <div class="row">
+            @Html.ActionLink("Regresar al inicio", "Index", "Clientes", new { @class = "btn btn-info col-sm-3 " })
+        </div>
+    </div>
+    @using (Html.BeginForm("Edit", "Clientes", FormMethod.Post, new { enctype = "multipart/formdata" }))
+    {
+        <div class="col-sm">
+            @Html.HiddenFor(m => m.Id)
+            <div class="row">
+                <div>
+                    <label>RFC</label>
+                </div>
+                @Html.TextBoxFor(m => m.RFC, new { @class = "form-control col-sm-3", id = "RFC" })
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <div>
+                    <label>Nombre</label>
+                </div>
+                @Html.TextBoxFor(m => m.Nombre, new { @class = "form-control col-sm-3", id = "Nombre" })
+            </div>
+        </div>
+        <div class=" col-sm">
+            <div class="row">
+                <div>
+                    <label>Fechas de Control</label>
+                </div>
+                @Html.TextBoxFor(m => m.Fecha_Control, new { type = "datetime-local", @class = "form-control col-sm-3", id = "fecha" })
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <div>Salario</div>
+                @Html.TextBoxFor(m => m.Salario, new { @class = "form-control col-sm-3", id = "Salario" })
+            </div>
+        </div>
+        <div class="col-sm">
+            <div class="row">
+                <div>Numero de Cliente</div>
+                @Html.TextBoxFor(m => m.Numero_Cliente, new { @class = "form-control col-sm-3", id = "Salario" })
+            </div>
+        </div>
+        <div class="col-sm">
+            &nbsp;
+        </div>
+        <div class="col-sm">
+            <div class="row">
+
+                <button class="btn btn-success">
+                    Agregar
+                </button>
+
+            </div>
+        </div>
+    }
+</div>
+
