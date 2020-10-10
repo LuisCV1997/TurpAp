@@ -43,11 +43,7 @@ namespace PL.Controllers
             return View(result);
         }
 
-        // GET: Clientes/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+      
 
         // GET: Clientes/Create
         public ActionResult Create()
@@ -93,8 +89,13 @@ namespace PL.Controllers
                     resp.Wait();
 
                     var productoJson = readTask.Result.Object.ToString();
-                    cliente = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Cliente>(productoJson);
-
+                   ML.Cliente cliente1 = Newtonsoft.Json.JsonConvert.DeserializeObject<ML.Cliente>(productoJson);
+                    cliente.Id = cliente1.Id;
+                    cliente.RFC = cliente1.RFC;
+                    cliente.Nombre = cliente1.Nombre;
+                    cliente.Numero_Cliente = cliente1.Numero_Cliente;
+                    cliente.Fecha_Control = cliente1.Fecha_Control;
+                    cliente.Salario = cliente1.Salario;
                     correct = true;
                 }
                 else
@@ -122,7 +123,7 @@ namespace PL.Controllers
             using (var clien = new HttpClient())
             {
                 clien.BaseAddress = new Uri("https://localhost:44384/api/");
-                var post = clien.PostAsJsonAsync<ML.Cliente>("Cliente/Delete", cliente);
+                var post = clien.PostAsJsonAsync<ML.Cliente>("Cliente/Update", cliente);
                 post.Wait();
                 var result = post.Result;
                 if (result.IsSuccessStatusCode)

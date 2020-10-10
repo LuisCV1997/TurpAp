@@ -71,9 +71,9 @@
                                 <td class="text-center">@cliente.Numero_Cliente</td>
                                 <td class="text-center">
                                     <a href="@Url.Action("Edit","Clientes", new { id = cliente.Id})" data-toggle="tooltip" data-placement="bottom" title="Actulizar"><i class="fas fa-edit"></i></a>
-                                    <a href="@Url.Action("Delete","Clientes", new { id = cliente.Id })" data-toggle="tooltip" data-placement="bottom" title="Borrar"><i class="fas fa-trash-alt"></i></a>
+                                    <a href="@Url.Action("Delete","Clientes", new { id = cliente.Id })" onclick="return confirm('¿Estas seguro quieres eliminar a este usuario?')" data-toggle="tooltip" data-placement="bottom" title="Borrar"><i class="fas fa-trash-alt"></i></a>
                                     <a href="@Url.Action("TestFile", "Clientes", new { id = cliente.Id})" data-toggle="tooltip" data-placement="bottom" title="Imprimir txt"><i class="fas fa-file-alt"></i></a>
-                                    <a href="@Url.Action("XMlFile", "Clientes", new { id = cliente.Id})" onclick="return confirm('¿Estas seguro quieres eliminar a este usuario?');" data-toggle="tooltip" data-placement="bottom" title="Imprimir xml"><i class="fas fa-file-code"></i></a>
+                                    <a href="@Url.Action("XMlFile", "Clientes", new { id = cliente.Id})"  data-toggle="tooltip" data-placement="bottom" title="Imprimir xml"><i class="fas fa-file-code"></i></a>
                                 </td>
                                 <td></td>
                             </tr>

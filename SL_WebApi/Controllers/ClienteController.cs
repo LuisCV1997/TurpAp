@@ -41,7 +41,7 @@ namespace SL_WebApi.Controllers
         [Route("api/Cliente/Delete/{id}")]
         [HttpGet]
         public IHttpActionResult Delete (int id)
-        {
+            {
             var result = BL.Cliente.Delete(id);
             return Ok(result);
         }

@@ -41,7 +41,9 @@
                 <div>
                     <label>Fechas de Control</label>
                 </div>
-                @Html.TextBoxFor(m => m.Fecha_Control, new { type = "datetime-local", @class = "form-control col-sm-3", id = "fecha" })
+                @Html.TextBoxFor(m => Model.Fecha_Control, "{0:yyyy-MM-dd}", new { @type = "datetime-local", @class = "form-control col-sm-5", id = "fecha"})
+             
+             
             </div>
         </div>
         <div class="col-sm">
