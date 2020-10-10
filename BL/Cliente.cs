@@ -219,6 +219,36 @@ namespace BL
 
             return result;
         }
-        
+        public static ML.Result GEtById2(int id)
+        {
+            ML.Result result = new ML.Result();
+            result.Objects = new List<object>();
+            try
+            {
+                using (DL.TurboPacEntities context = new DL.TurboPacEntities())
+                {
+                    var list = context.SP_GetById_Cliente(id);
+                    foreach (var item in list)
+                    {
+                        ML.Cliente cliente = new ML.Cliente();
+                        cliente.Id = item.Id;
+                        cliente.Nombre = item.Nombre;
+                        cliente.Salario = item.Salario;
+                        cliente.RFC = item.RFC;
+                        cliente.Fecha_Control = item.Fecha_Control;
+                        cliente.Numero_Cliente = item.Numero_Cliente;
+                        result.Object = cliente;
+                    }
+                    result.Correct = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.ex = ex.InnerException;
+                result.Messages = ex.Message;
+                result.Correct = false;
+            }
+            return result;
+        }
     }
 }
